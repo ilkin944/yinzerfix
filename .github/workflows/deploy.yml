@@ -20,14 +20,10 @@ jobs:
     - name: Deploy to Droplet
       run: |
         ssh -o StrictHostKeyChecking=no deployuser@167.99.2.112 << 'EOF'
-          git config --global --add safe.directory /var/www/yinzer
           cd /var/www/yinzer
-          sudo chown -R $USER:$USER .
-          sudo chmod -R 755 .
+          git config --global --add safe.directory /var/www/yinzer
           git pull origin master
           docker-compose down
           docker-compose build --no-cache
           docker-compose up -d --force-recreate
         EOF
-
-    
