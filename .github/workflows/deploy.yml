@@ -1,4 +1,4 @@
-name: Deploy to DigitalOcean
+name: Deploy to DO
 on:
   push:
     branches:
@@ -17,7 +17,7 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     
-    - name: Deploy to Droplet
+    - name: Deploy to DODrop
       run: |
         ssh -o StrictHostKeyChecking=no deployuser@167.99.2.112 << 'EOF'
           cd /var/www/yinzer
