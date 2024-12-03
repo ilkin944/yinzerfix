@@ -1,12 +1,12 @@
-FROM node:18-alpine AS builder
+FROM node:20-alpine  AS builder
 WORKDIR /app
-COPY package.json package-lock.json pnpm-lock.yaml ./
-RUN pnpm install
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN pnpm run build
+RUN npm run build
 
-FROM node:18-alpine AS runner
+FROM node:20-alpine  AS runner
 WORKDIR /app
 COPY --from=builder /app ./
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["npm", "start"]
