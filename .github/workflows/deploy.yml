@@ -19,7 +19,7 @@ jobs:
     
     - name: Deploy to Droplet
       run: |
-        ssh -o StrictHostKeyChecking=no root@167.99.2.112 << 'EOF'
+        ssh -o StrictHostKeyChecking=no deployuser@167.99.2.112 << 'EOF'
           cd /var/www/yinzer
           git pull origin master
           docker-compose down
