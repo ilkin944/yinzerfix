@@ -12,12 +12,12 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
-    - name: Set up SSH
+    - name: Set up SSH Agent
       uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Deploy to DigitalOcean
+    
+    - name: Deploy to Droplet
       run: |
         ssh -o StrictHostKeyChecking=no root@167.99.2.112 << 'EOF'
           cd /var/www/yinzer
@@ -25,3 +25,4 @@ jobs:
           docker-compose down
           docker-compose up -d --build
         EOF
+    
