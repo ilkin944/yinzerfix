@@ -19,7 +19,7 @@ jobs:
     
     - name: Deploy to Digital Ocean
       run: |
-        ssh -o StrictHostKeyChecking=no root@167.99.2.112 << 'EOF'
+        ssh -o StrictHostKeyChecking=no deployuser@167.99.2.112 << 'EOF'
           cd /var/www/yinzer
           git config --global --add safe.directory /var/www/yinzer
           git pull origin master
