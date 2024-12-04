@@ -1,29 +1,48 @@
 version: "3.8"
+
 services:
   client:
-    build: ./client
+    build:
+      context: ./client
+    volumes:
+      - ./client:/app
+      - /app/node_modules
     ports:
       - "3000:3000"
+    networks:
+      - default
+    command: npm run dev
+    depends_on:
+      - server
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:4000
+      - NEXT_PUBLIC_API_URL=http://localhost:3000
 
   server:
-    build: ./server
+    build:
+      context: ./server
+    volumes:
+      - ./server:/app
+      - /app/node_modules
     ports:
-      - "4000:4000"
+      - "8000:8000"
+    networks:
+      - default
     environment:
       - MONGO_URI=mongodb://mongo:27017/mydb
       - REDIS_URI=redis://redis:6379
     depends_on:
       - mongo
       - redis
+    restart: on-failure
 
   mongo:
-    image: mongo:5.0
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data/db
     ports:
       - "27017:27017"
 
   redis:
-    image: redis:6.2
+    image: redis:latest
     ports:
       - "6379:6379"
