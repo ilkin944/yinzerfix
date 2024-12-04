@@ -12,6 +12,10 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
+    - name: Wipe Github Actions cache
+      uses: easimon/wipe-cache@v2
+  
+
     - name: Set up SSH Agent
       uses: webfactory/ssh-agent@v0.5.4
       with:
