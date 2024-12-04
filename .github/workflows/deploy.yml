@@ -1,4 +1,4 @@
-name: Deploy to DO
+name: Deploy to Digital Ocean
 on:
   push:
     branches:
@@ -10,16 +10,16 @@ jobs:
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up SSH Agent
       uses: webfactory/ssh-agent@v0.5.4
       with:
         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
     
-    - name: Deploy to DODrop
+    - name: Deploy to Digital Ocean
       run: |
-        ssh -o StrictHostKeyChecking=no deployuser@167.99.2.112 << 'EOF'
+        ssh -o StrictHostKeyChecking=no root@167.99.2.112 << 'EOF'
           cd /var/www/yinzer
           git config --global --add safe.directory /var/www/yinzer
           git pull origin master
